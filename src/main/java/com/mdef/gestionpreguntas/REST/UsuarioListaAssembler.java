@@ -8,9 +8,11 @@ import java.util.stream.Collectors;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
+import org.springframework.stereotype.Component;
 
 import com.mdef.gestionpreguntas.entidades.Usuario;
 
+@Component
 public class UsuarioListaAssembler implements RepresentationModelAssembler<Usuario, UsuarioListaModel>{
 
 	@Override
