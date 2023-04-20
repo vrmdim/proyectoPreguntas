@@ -23,10 +23,10 @@ public class Pregunta {
 	public String getEnunciado() {
 		return enunciado;
 	}
-	protected void setId(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-	protected void setEnunciado(String enunciado) {
+	public void setEnunciado(String enunciado) {
 		this.enunciado = enunciado;
 	}
 	@Override

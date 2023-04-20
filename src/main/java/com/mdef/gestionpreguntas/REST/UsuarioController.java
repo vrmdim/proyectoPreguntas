@@ -49,8 +49,8 @@ public class UsuarioController {
 	}
 	
 	
-	@GetMapping("PorNombreDelUsuario")
-	public CollectionModel<UsuarioListaModel> usuarioPorNombre(@RequestParam String nombre) { 
+	@GetMapping("porNombre")
+	public CollectionModel<UsuarioListaModel> usuarioPorNombre(@RequestParam("nombre") String nombre) { 
 		return listaAssembler.toCollection(
 				repositorio.findUsuarioByNombre(nombre) 
 				); 

@@ -18,10 +18,10 @@ public class UsuarioModel extends RepresentationModel<UsuarioModel>{
 	public String getNombreUsuario() {
 		return nombreUsuario;
 	}
-	protected void setNombre(String nombre) {
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	protected void setNombreUsuario(String nombreUsuario) {
+	public void setNombreUsuario(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
 	}
 	@Override
