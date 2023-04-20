@@ -2,7 +2,6 @@ package com.mdef.gestionpreguntas.REST;
 
 import org.slf4j.Logger;
 import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mdef.gestionpreguntas.GestionpreguntasApplication;
@@ -34,8 +34,13 @@ public class UsuarioController {
 		log = GestionpreguntasApplication.log;
 	}
 	
+	@GetMapping
+	public CollectionModel<UsuarioListaModel> all() {
+		return listaAssembler.toCollection(repositorio.findAll());
+	}
+	
 	@GetMapping("{id}")
-	public EntityModel<Usuario> one(@PathVariable Long id) {
+	public UsuarioModel one(@PathVariable Long id) {
 		Usuario usuario = repositorio.findById(id)
 				.orElseThrow(() -> new RegisterNotFoundException(id, "usuario"));
 		log.info("Recuperado " + usuario);
@@ -43,20 +48,23 @@ public class UsuarioController {
 		return assembler.toModel(usuario);
 	}
 	
-	@GetMapping
-	public CollectionModel<UsuarioListaModel> all() {
-		return listaAssembler.toCollection(repositorio.findAll());
-	}
+	
+	@GetMapping("PorNombreDelUsuario")
+	public CollectionModel<UsuarioListaModel> usuarioPorNombre(@RequestParam String nombre) { 
+		return listaAssembler.toCollection(
+				repositorio.findUsuarioByNombre(nombre) 
+				); 
+		}
 	
 	@PostMapping
-	public EntityModel<Usuario> add(@RequestBody UsuarioModel model) {
+	public UsuarioModel add(@RequestBody UsuarioPostModel model) {
 		Usuario usuario = repositorio.save(assembler.toEntity(model));
 		log.info("Añadido " + usuario);
 		return assembler.toModel(usuario);
 	}
 	
 	@PutMapping("{id}")
-	public EntityModel<Usuario> edit(@PathVariable Long id, @RequestBody UsuarioModel model){
+	public UsuarioModel edit(@PathVariable Long id, @RequestBody UsuarioPutModel model){
 		Usuario usuario = repositorio.findById(id).map(usr -> {
 			usr.setNombre(model.getNombre());
 			return repositorio.save(usr);

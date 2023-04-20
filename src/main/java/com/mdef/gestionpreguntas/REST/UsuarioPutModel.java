@@ -1,7 +1,9 @@
 package com.mdef.gestionpreguntas.REST;
 
 import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
 
+@Relation(itemRelation = "usuario")
 public class UsuarioPutModel extends RepresentationModel<UsuarioPutModel>{
 	
 	private String nombre;
