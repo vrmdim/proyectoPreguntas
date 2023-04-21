@@ -12,10 +12,7 @@ public class UsuarioModel extends RepresentationModel<UsuarioModel>{
 
 	private String nombre;
 	private String nombreUsuario;
-	private Role role;
-	private Departamento departamento; 
-	private Tipo tipo;
-	
+	private Role role;	
 	
 	public String getNombre() {
 		return nombre;
@@ -29,25 +26,6 @@ public class UsuarioModel extends RepresentationModel<UsuarioModel>{
 	public void setNombreUsuario(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
 	}
-	
-	public Role getRol() {
-		return role;
-	}
-	public void setRol(Role role) {
-		this.role = role;
-	}
-	public Departamento getDepartamento() {
-		return departamento;
-	}
-	public void setDepartamento(Departamento departamento) {
-		this.departamento = departamento;
-	}
-	public Tipo getTipo() {
-		return tipo;
-	}
-	public void setTipo(Tipo tipo) {
-		this.tipo = tipo;
-	}
 	public Role getRole() {
 		return role;
 	}
@@ -56,9 +34,9 @@ public class UsuarioModel extends RepresentationModel<UsuarioModel>{
 	}
 	@Override
 	public String toString() {
-		return "UsuarioModel [nombre=" + nombre + ", nombreUsuario=" + nombreUsuario + ", rol=" + role
-				+ ", departamento=" + departamento + ", tipo=" + tipo + ", role=" + role + "]";
+		return "UsuarioModel [nombre=" + nombre + ", nombreUsuario=" + nombreUsuario + ", role=" + role + "]";
 	}
+
 
 	
 	

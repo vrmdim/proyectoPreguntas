@@ -39,7 +39,7 @@ public class UsuarioAssembler implements RepresentationModelAssembler<Usuario, U
 		//Añado los parámetros que tenga UsuarioModel
 		usuarioModel.setNombre(entity.getNombre());
 		usuarioModel.setNombreUsuario(entity.getNombreUsuario());
-		usuarioModel.setRol(entity.getRole());
+		usuarioModel.setRole(entity.getRole());
 		
 		
 		

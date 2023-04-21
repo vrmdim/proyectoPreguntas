@@ -10,6 +10,8 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
+import com.mdef.gestionpreguntas.entidades.Administrador;
+import com.mdef.gestionpreguntas.entidades.NoAdministrador;
 import com.mdef.gestionpreguntas.entidades.Usuario;
 
 @Component
@@ -17,8 +19,10 @@ public class UsuarioListaAssembler implements RepresentationModelAssembler<Usuar
 
 	@Override
 	public UsuarioListaModel toModel(Usuario entity) {
+		
 		UsuarioListaModel model = new UsuarioListaModel();
 		model.setNombre(entity.getNombre());
+		model.setRole(entity.getRole());
 		model.add(
 					linkTo(methodOn(UsuarioController.class).one(entity.getId())).withSelfRel()
 				);

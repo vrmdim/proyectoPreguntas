@@ -21,6 +21,7 @@ public class NoAdministrador extends Usuario {
 	
 	public NoAdministrador() {
 		super();
+		super.setRole(Usuario.Role.NoAdministrador);
 	}
 
 	private Departamento departamento;
