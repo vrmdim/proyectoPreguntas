@@ -2,9 +2,6 @@ package com.mdef.gestionpreguntas.REST;
 
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;
-
-import com.mdef.gestionpreguntas.entidades.NoAdministrador.Departamento;
-import com.mdef.gestionpreguntas.entidades.NoAdministrador.Tipo;
 import com.mdef.gestionpreguntas.entidades.Usuario.Role;
 
 @Relation(itemRelation="usuario")

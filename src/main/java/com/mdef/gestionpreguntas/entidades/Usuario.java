@@ -6,11 +6,14 @@ import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.DiscriminatorType;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -34,6 +37,11 @@ public class Usuario {
 	private String nombreUsuario;
 	private String contrasena;
 	private Role role;
+	
+	// RELACION MANY TO ONE
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="PreguntaId")
+	private Pregunta pregunta;
 	
 	public Long getId() {
 		return id;
@@ -64,6 +72,12 @@ public class Usuario {
 	}
 	public void setRole(Role role) {
 		this.role = role;
+	}
+	public Pregunta getPregunta() {
+		return pregunta;
+	}
+	public void setPregunta(Pregunta pregunta) {
+		this.pregunta = pregunta;
 	}
 	@Override
 	public String toString() {

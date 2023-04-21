@@ -10,8 +10,6 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
-import com.mdef.gestionpreguntas.entidades.Administrador;
-import com.mdef.gestionpreguntas.entidades.NoAdministrador;
 import com.mdef.gestionpreguntas.entidades.Usuario;
 
 @Component
