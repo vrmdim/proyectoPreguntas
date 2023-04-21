@@ -12,6 +12,11 @@ import jakarta.persistence.Table;
 @Table(name="USUARIOS")
 public class Usuario {
 	
+	public static enum Role {
+		Administrador,
+		NoAdministrador
+	}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@JsonIgnore
@@ -19,7 +24,7 @@ public class Usuario {
 	private String nombre;
 	private String nombreUsuario;
 	private String contrasena;
-	//private Role role;
+	private Role role;
 	
 	public Long getId() {
 		return id;
@@ -45,7 +50,12 @@ public class Usuario {
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
 	}
-	
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nombre=" + nombre + ", nombreUsuario=" + nombreUsuario + ", contrasena="

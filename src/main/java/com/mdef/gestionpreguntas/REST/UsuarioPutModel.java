@@ -3,15 +3,19 @@ package com.mdef.gestionpreguntas.REST;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;
 
+import com.mdef.gestionpreguntas.entidades.NoAdministrador.Departamento;
+import com.mdef.gestionpreguntas.entidades.NoAdministrador.Tipo;
+import com.mdef.gestionpreguntas.entidades.Usuario.Role;
+
 @Relation(itemRelation = "usuario")
 public class UsuarioPutModel extends RepresentationModel<UsuarioPutModel>{
 	
 	private String nombre;
 	private String nombreUsuario;
-	//private Departamento departamento;
-	//private Tipo tipo;
+	private Departamento departamento;
+	private Tipo tipo;
 	private String telefono;
-	//private Role role;
+	private Role role;
 	
 	
 	public String getNombre() {
@@ -31,14 +35,31 @@ public class UsuarioPutModel extends RepresentationModel<UsuarioPutModel>{
 	}
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}	
+	public Role getRole() {
+		return role;
 	}
-	
+	public void setRole(Role role) {
+		this.role = role;
+	}
+	public Departamento getDepartamento() {
+		return departamento;
+	}
+	public void setDepartamento(Departamento departamento) {
+		this.departamento = departamento;
+	}
+	public Tipo getTipo() {
+		return tipo;
+	}
+	public void setTipo(Tipo tipo) {
+		this.tipo = tipo;
+	}
 	@Override
 	public String toString() {
-		return "UsuarioPutModel [nombre=" + nombre + ", nombreUsuario=" + nombreUsuario + ", telefono=" + telefono
-				+ "]";
+		return "UsuarioPutModel [nombre=" + nombre + ", nombreUsuario=" + nombreUsuario + ", departamento="
+				+ departamento + ", tipo=" + tipo + ", telefono=" + telefono + ", role=" + role + "]";
 	}
 	
-	
+
 
 }

@@ -6,6 +6,8 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
+import com.mdef.gestionpreguntas.entidades.Administrador;
+import com.mdef.gestionpreguntas.entidades.NoAdministrador;
 import com.mdef.gestionpreguntas.entidades.Usuario;
 
 
@@ -15,11 +17,31 @@ public class UsuarioAssembler implements RepresentationModelAssembler<Usuario, U
 	@Override
 	public UsuarioModel toModel(Usuario entity) {
 		
-		UsuarioModel usuarioModel = new UsuarioModel();
+		UsuarioModel usuarioModel;
+		
+		/**
+		 * Compruebo el tipo de usuario que es (Administrador / NoAdministrador)
+		 */
+		if (entity.getRole() == Usuario.Role.Administrador) {
+			UsuarioAdminModel adminModel = new UsuarioAdminModel();
+			adminModel.setTelefono(((Administrador) entity).getTelefono());
+			
+			// meto admin model en userModel
+			usuarioModel = adminModel;
+		} else {
+			UsuarioNoAdminModel noAdminModel = new UsuarioNoAdminModel();
+			noAdminModel.setDepartamento(((NoAdministrador) entity).getDepartamento());
+			noAdminModel.setTipo(((NoAdministrador) entity).getTipo());
+			usuarioModel = noAdminModel;
+		}
+		
 		
 		//Añado los parámetros que tenga UsuarioModel
 		usuarioModel.setNombre(entity.getNombre());
 		usuarioModel.setNombreUsuario(entity.getNombreUsuario());
+		usuarioModel.setRol(entity.getRole());
+		
+		
 		
 		// Puedo añadir links en el model que llega a la Vista para saber qué opciones de API hay
 		usuarioModel.add(
@@ -30,11 +52,30 @@ public class UsuarioAssembler implements RepresentationModelAssembler<Usuario, U
 	}
 	
 	public Usuario toEntity(UsuarioPostModel model) {
-		Usuario usuario = new Usuario();
+		
+		Usuario usuario;
+			
+		if (model.getRole() == Usuario.Role.Administrador) {
+			Administrador administrador = new Administrador();
+			administrador.setTelefono(model.getTelefono());
+			usuario = administrador;
+			
+		} else {
+			
+			NoAdministrador noAdministrador = new NoAdministrador();
+			noAdministrador.setTipo(model.getTipo());
+			noAdministrador.setDepartamento(model.getDepartamento());
+			usuario = noAdministrador;
+		}
+		
 		usuario.setNombre(model.getNombre());
 		usuario.setNombreUsuario(model.getNombreUsuario());
+		
 		return usuario;
 	}
 
-
 }
+
+
+
+
