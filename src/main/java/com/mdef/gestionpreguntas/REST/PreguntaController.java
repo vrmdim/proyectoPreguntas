@@ -2,6 +2,7 @@ package com.mdef.gestionpreguntas.REST;
 
 import org.slf4j.Logger;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,6 +52,12 @@ public class PreguntaController {
 		log.info("Añadida " + pregunta);
 		return assembler.toModel(pregunta);
 		
+	}
+	
+	@DeleteMapping("{id}")
+	public void delete(@PathVariable Long id) {
+		log.info("Borrada pregunta " + id);
+		repositorio.deleteById(id);
 	}
 	
 	
