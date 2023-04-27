@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,6 +53,18 @@ public class PreguntaController {
 		log.info("Añadida " + pregunta);
 		return assembler.toModel(pregunta);
 		
+	}
+	
+	
+	@PutMapping("{id}")
+	public PreguntaModel pit(@PathVariable Long id, @RequestBody PreguntaModel model) {
+		Pregunta pregunta = repositorio.findById(id).map(prg -> {
+			prg.setEnunciado(model.getEnunciado());
+			return repositorio.save(prg);
+		})
+		.orElseThrow(() -> new RegisterNotFoundException(id, "pregunta"));
+		log.info("Actualizada " + pregunta);
+		return assembler.toModel(pregunta);
 	}
 	
 	@DeleteMapping("{id}")
