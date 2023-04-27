@@ -24,10 +24,11 @@ public class PreguntaAssembler implements RepresentationModelAssembler<Pregunta,
 		return model;
 	}
 		
-	public Pregunta toEntity(PreguntaModel model) {
+	public Pregunta toEntity(PreguntaPostModel model) {
 		Pregunta pregunta = new Pregunta();
 		
 		pregunta.setEnunciado(model.getEnunciado());
+		pregunta.setUsuario(model.getUsuario());
 		
 		return pregunta;
 		

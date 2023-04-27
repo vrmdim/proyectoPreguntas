@@ -8,14 +8,11 @@ import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.DiscriminatorType;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -42,7 +39,7 @@ public class Usuario {
 	private Role role;
 	
 	// RELACION MANY TO ONE
-	@OneToMany(mappedBy = "pregunta")
+	@OneToMany(mappedBy = "usuario")
 	List<Pregunta> preguntas;
 	
 	public Long getId() {

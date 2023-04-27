@@ -1,11 +1,11 @@
 package com.mdef.gestionpreguntas.REST;
 
-import java.util.Collection;
-
 import org.slf4j.Logger;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,7 +45,13 @@ public class PreguntaController {
 
 	}
 	
-	
+	@PostMapping
+	public PreguntaModel add(@RequestBody PreguntaPostModel model) {
+		Pregunta pregunta = repositorio.save(assembler.toEntity(model));
+		log.info("Añadida " + pregunta);
+		return assembler.toModel(pregunta);
+		
+	}
 	
 	
 }
