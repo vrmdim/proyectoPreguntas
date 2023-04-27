@@ -1,0 +1,74 @@
+package com.mdef.gestionpreguntas.REST;
+
+import java.util.Collection;
+
+import org.slf4j.Logger;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.mdef.gestionpreguntas.GestionpreguntasApplication;
+import com.mdef.gestionpreguntas.entidades.Pregunta;
+import com.mdef.gestionpreguntas.repositorios.PreguntaRepositorio;
+
+@RestController
+@RequestMapping("/preguntas")
+public class PreguntaController {
+
+	private final PreguntaRepositorio repositorio;
+	private final PreguntaAssembler assembler;
+	private final PreguntaListaAssembler listaAssembler;
+	private final Logger log;
+	
+	PreguntaController (PreguntaRepositorio repositorio, PreguntaAssembler assembler,
+						PreguntaListaAssembler listaAssembler) {
+		this.repositorio = repositorio;
+		this.assembler = assembler;
+		this.listaAssembler = listaAssembler;
+		log = GestionpreguntasApplication.log;
+	}
+	
+	@GetMapping
+	public CollectionModel<PreguntaListaModel> all() {
+		return listaAssembler.toCollection(repositorio.findAll());
+	}
+	
+	@GetMapping("{id}")
+	public PreguntaModel one(@PathVariable Long id) {
+		Pregunta pregunta = repositorio.findById(id)
+				.orElseThrow(() -> new RegisterNotFoundException(id, "pregunta"));
+		log.info("Recuperada " + pregunta);
+		
+		return assembler.toModel(pregunta);
+
+	}
+	
+	
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

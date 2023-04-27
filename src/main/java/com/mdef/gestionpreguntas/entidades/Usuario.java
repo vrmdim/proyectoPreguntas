@@ -1,5 +1,7 @@
 package com.mdef.gestionpreguntas.entidades;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.DiscriminatorColumn;
@@ -14,6 +16,7 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -39,9 +42,8 @@ public class Usuario {
 	private Role role;
 	
 	// RELACION MANY TO ONE
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="PreguntaId")
-	private Pregunta pregunta;
+	@OneToMany(mappedBy = "pregunta")
+	List<Pregunta> preguntas;
 	
 	public Long getId() {
 		return id;
@@ -73,17 +75,19 @@ public class Usuario {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	public Pregunta getPregunta() {
-		return pregunta;
+	public List<Pregunta> getPreguntas() {
+		return preguntas;
 	}
-	public void setPregunta(Pregunta pregunta) {
-		this.pregunta = pregunta;
+	public void setPreguntas(List<Pregunta> preguntas) {
+		this.preguntas = preguntas;
 	}
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nombre=" + nombre + ", nombreUsuario=" + nombreUsuario + ", contrasena="
-				+ contrasena + "]";
+				+ contrasena + ", role=" + role + ", preguntas=" + preguntas + "]";
 	}
+
+
 	
 	
 }

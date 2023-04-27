@@ -45,7 +45,9 @@ public class UsuarioAssembler implements RepresentationModelAssembler<Usuario, U
 		
 		// Puedo añadir links en el model que llega a la Vista para saber qué opciones de API hay
 		usuarioModel.add(
-				linkTo(methodOn(UsuarioController.class).one(entity.getId())).withSelfRel()
+				linkTo(methodOn(UsuarioController.class).one(entity.getId())).withSelfRel(),
+				// Link de articulos HERENCIA
+				linkTo(methodOn(UsuarioController.class).preguntas(entity.getId())).withRel("preguntas")
 				);
 				
 		return usuarioModel;

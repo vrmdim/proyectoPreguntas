@@ -5,9 +5,12 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -21,9 +24,10 @@ public class Pregunta {
 	private Long id;
 	private String enunciado;
 	
-	// RELACION ONE TO MANY (pregunta hace referencia a como llame la variable en Usuario)0
-	@OneToMany(mappedBy = "pregunta")
-	private List<Usuario> usuarios;
+	// RELACION ONE TO MANY (pregunta hace referencia a como llame la variable en Usuario)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", nullable = false)
+	private Usuario usuario;
 	
 	public Long getId() {
 		return id;
@@ -37,10 +41,17 @@ public class Pregunta {
 	public void setEnunciado(String enunciado) {
 		this.enunciado = enunciado;
 	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	@Override
 	public String toString() {
-		return "Pregunta [id=" + id + ", enunciado=" + enunciado + "]";
+		return "Pregunta [id=" + id + ", enunciado=" + enunciado + ", usuario=" + usuario + "]";
 	}
+
 	
 	
 

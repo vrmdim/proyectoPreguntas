@@ -1,5 +1,11 @@
 package com.mdef.gestionpreguntas.REST;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mdef.gestionpreguntas.GestionpreguntasApplication;
+import com.mdef.gestionpreguntas.entidades.Pregunta;
 import com.mdef.gestionpreguntas.entidades.Usuario;
+import com.mdef.gestionpreguntas.repositorios.PreguntaRepositorio;
 import com.mdef.gestionpreguntas.repositorios.UsuarioRepositorio;
 
 
@@ -24,13 +32,25 @@ public class UsuarioController {
 	private final UsuarioRepositorio repositorio;
 	private final UsuarioAssembler assembler;
 	private final UsuarioListaAssembler listaAssembler;
+	// HERENCIA
+	private final PreguntaRepositorio preguntaRepositorio;
+	private final PreguntaListaAssembler preguntaListaAssembler;
+	private final PreguntaAssembler preguntaAssembler;
 	private final Logger log;
 	
-	UsuarioController (UsuarioRepositorio repositorio, UsuarioAssembler assembler, 
-						UsuarioListaAssembler listaAssembler) {
+	UsuarioController (UsuarioRepositorio repositorio, 
+						UsuarioAssembler assembler, 
+						UsuarioListaAssembler listaAssembler, 
+						PreguntaRepositorio preguntaRepositorio,
+						PreguntaAssembler preguntaAssembler,
+						PreguntaListaAssembler preguntaListaAssembler
+						) {
 		this.repositorio = repositorio;
 		this.assembler = assembler;
 		this.listaAssembler = listaAssembler;
+		this.preguntaRepositorio = preguntaRepositorio;
+		this.preguntaAssembler = preguntaAssembler;
+		this.preguntaListaAssembler = preguntaListaAssembler;
 		log = GestionpreguntasApplication.log;
 	}
 	
@@ -55,6 +75,35 @@ public class UsuarioController {
 				repositorio.findUsuarioByNombre(nombre) 
 				); 
 		}
+	
+	// preguntas del usuario HERENCIA
+	@GetMapping("{id}/preguntas")
+	public CollectionModel<PreguntaListaModel> preguntas(@PathVariable long id) {
+		
+		List<Pregunta> preguntas = repositorio.findById(id)
+				.orElseThrow(() -> new RegisterNotFoundException(id, "usuario"))
+				.getPreguntas();
+		
+		return CollectionModel.of(
+				preguntas.stream().map(pregunta -> preguntaListaAssembler.toModel(pregunta)).collect(Collectors.toList()),
+				linkTo(methodOn(UsuarioController.class).one(id)).slash("preguntas").withSelfRel()
+				);
+		
+	}
+	
+	// Tomas lo ha hecho asi (Hace falta crear el metodo de repositorio Pregunta
+	@GetMapping("{id}/preguntas2")
+	public CollectionModel<PreguntaListaModel> preguntas2(@PathVariable long id) {
+		
+		Usuario usuario = repositorio.findById(id)
+				.orElseThrow(() -> new RegisterNotFoundException(id, "usuario"));
+		log.info("Recuperadas preguntas del usuario " + usuario);
+		
+		return preguntaListaAssembler.toCollection(preguntaRepositorio.findPreguntaByUsuario(usuario));
+		
+		
+		
+	}
 	
 	@PostMapping
 	public UsuarioModel add(@RequestBody UsuarioPostModel model) {
