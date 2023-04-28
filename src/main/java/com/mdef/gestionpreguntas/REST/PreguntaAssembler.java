@@ -19,7 +19,8 @@ public class PreguntaAssembler implements RepresentationModelAssembler<Pregunta,
 		
 		model.add(
 				linkTo(methodOn(PreguntaController.class).one(entity.getId())).withSelfRel(),
-				linkTo(methodOn(UsuarioController.class).one(entity.getId())).withRel("usuario")
+				linkTo(methodOn(UsuarioController.class).one(entity.getId())).withRel("usuario"),
+				linkTo(methodOn(FamiliaController.class).one(entity.getId())).withRel("familia")
 				);
 		return model;
 	}

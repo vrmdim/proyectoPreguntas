@@ -21,10 +21,14 @@ public class Pregunta {
 	private Long id;
 	private String enunciado;
 	
-	// RELACION ONE TO MANY (pregunta hace referencia a como llame la variable en Usuario)
+	// RELACION MANY TO ONE (pregunta hace referencia a como llame la variable en Usuario)
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "usuarioId", nullable = false)
 	private Usuario usuario;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "familiaId", nullable = false)
+	private Familia familia;
 	
 	public Long getId() {
 		return id;

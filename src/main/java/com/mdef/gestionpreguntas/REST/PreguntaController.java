@@ -57,7 +57,7 @@ public class PreguntaController {
 	
 	
 	@PutMapping("{id}")
-	public PreguntaModel pit(@PathVariable Long id, @RequestBody PreguntaModel model) {
+	public PreguntaModel put(@PathVariable Long id, @RequestBody PreguntaModel model) {
 		Pregunta pregunta = repositorio.findById(id).map(prg -> {
 			prg.setEnunciado(model.getEnunciado());
 			return repositorio.save(prg);

@@ -35,7 +35,6 @@ public class UsuarioController {
 	// HERENCIA
 	private final PreguntaRepositorio preguntaRepositorio;
 	private final PreguntaListaAssembler preguntaListaAssembler;
-	private final PreguntaAssembler preguntaAssembler;
 	private final Logger log;
 	
 	UsuarioController (UsuarioRepositorio repositorio, 
@@ -49,7 +48,6 @@ public class UsuarioController {
 		this.assembler = assembler;
 		this.listaAssembler = listaAssembler;
 		this.preguntaRepositorio = preguntaRepositorio;
-		this.preguntaAssembler = preguntaAssembler;
 		this.preguntaListaAssembler = preguntaListaAssembler;
 		log = GestionpreguntasApplication.log;
 	}
