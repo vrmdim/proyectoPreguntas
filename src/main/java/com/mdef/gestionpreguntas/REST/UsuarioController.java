@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -108,6 +109,7 @@ public class UsuarioController {
 	
 	@PostMapping
 	public UsuarioModel add(@Valid @RequestBody UsuarioPostModel model) {
+		// Seguridad contraseña
 		model.setContrasena(new BCryptPasswordEncoder().encode(model.getContrasena()));
 		Usuario usuario = repositorio.save(assembler.toEntity(model));
 		log.info("Añadido " + usuario);
@@ -115,18 +117,33 @@ public class UsuarioController {
 	}
 	
 	@PutMapping("{id}")
-	public UsuarioModel edit(@PathVariable Long id, @RequestBody UsuarioPutModel model){
+	public UsuarioModel edit(@PathVariable Long id, @Valid @RequestBody UsuarioPutModel model){
 		Usuario usuario = repositorio.findById(id).map(usr -> {
 			usr.setNombre(model.getNombre());
 			//METODOS SEGURIDAD
 			usr.setRole(model.getRole());
 			usr.setNombreUsuario(model.getNombreUsuario());
-			////usr.setAccountNonExpired(model.is)
+			usr.setAccountNonExpired(model.isAccountNonExpired());
+			usr.setAccountNonLocked(model.isAccountNonLocked());
+			usr.setCredentialsNonExpired(model.isCredentialsNonExpired());
+			usr.setEnabled(model.isEnabled());
 			return repositorio.save(usr);
 		})
 		.orElseThrow(() -> new RegisterNotFoundException(id, "usuario"));
 		log.info("Actualizado " + usuario);
 		return assembler.toModel(usuario);
+	}
+	
+	@PatchMapping("{id}/cambiarContrasena")
+	public UsuarioModel edit(@PathVariable Long id, @RequestBody String newPass) {
+		Usuario usuario = repositorio.findById(id).map(usr -> {
+			usr.setContrasena(new BCryptPasswordEncoder().encode(newPass));
+			return repositorio.save(usr);
+		})
+		.orElseThrow(() -> new RegisterNotFoundException(id, "usuario"));
+		log.info("Actualizada contraseña de " + usuario);
+		return assembler.toModel(usuario);	
+
 	}
 	
 	@DeleteMapping("{id}")

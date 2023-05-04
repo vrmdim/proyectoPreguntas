@@ -75,6 +75,37 @@ public class UsuarioAssembler implements RepresentationModelAssembler<Usuario, U
 		
 		return usuario;
 	}
+	
+	// Sobrecarga para UsuarioPutModel
+	public Usuario toEntity(UsuarioPutModel model) {
+		
+		Usuario usuario;
+			
+		if (model.getRole() == Usuario.Role.Administrador) {
+			Administrador administrador = new Administrador();
+			administrador.setTelefono(model.getTelefono());
+			usuario = administrador;
+			
+		} else {
+			
+			NoAdministrador noAdministrador = new NoAdministrador();
+			noAdministrador.setTipo(model.getTipo());
+			noAdministrador.setDepartamento(model.getDepartamento());
+			usuario = noAdministrador;
+		}
+		
+		usuario.setNombre(model.getNombre());
+		usuario.setNombreUsuario(model.getNombreUsuario());
+		
+		// Security
+		usuario.setAccountNonExpired(model.isAccountNonExpired());
+		usuario.setAccountNonLocked(model.isAccountNonLocked());
+		usuario.setCredentialsNonExpired(model.isCredentialsNonExpired());
+		usuario.setEnabled(model.isEnabled());
+		
+		
+		return usuario;
+	}
 
 }
 

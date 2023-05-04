@@ -7,6 +7,7 @@ import com.mdef.gestionpreguntas.entidades.NoAdministrador.Departamento;
 import com.mdef.gestionpreguntas.entidades.NoAdministrador.Tipo;
 import com.mdef.gestionpreguntas.entidades.Usuario.Role;
 
+
 @Relation(itemRelation = "usuario")
 public class UsuarioPutModel extends RepresentationModel<UsuarioPutModel>{
 	
@@ -17,7 +18,13 @@ public class UsuarioPutModel extends RepresentationModel<UsuarioPutModel>{
 	private String telefono;
 	private Role role;
 	
+	// SECURITY
+	private boolean accountNonExpired = true;
+	private boolean accountNonLocked = true;
+	private boolean credentialsNonExpired = true;
+	private boolean enabled = true;
 	
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -60,6 +67,32 @@ public class UsuarioPutModel extends RepresentationModel<UsuarioPutModel>{
 				+ departamento + ", tipo=" + tipo + ", telefono=" + telefono + ", role=" + role + "]";
 	}
 	
+	
+	// METODOS SEGURIDAD
+	public boolean isAccountNonExpired() {
+		return accountNonExpired;
+	}
+	public void setAccountNonExpired(boolean accountNonExpired) {
+		this.accountNonExpired = accountNonExpired;
+	}
+	public boolean isAccountNonLocked() {
+		return accountNonLocked;
+	}
+	public void setAccountNonLocked(boolean accountNonLocked) {
+		this.accountNonLocked = accountNonLocked;
+	}
+	public boolean isCredentialsNonExpired() {
+		return credentialsNonExpired;
+	}
+	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+		this.credentialsNonExpired = credentialsNonExpired;
+	}
+	public boolean isEnabled() {
+		return enabled;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 
 
 }
