@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.DiscriminatorType;
 import jakarta.persistence.DiscriminatorValue;
@@ -34,6 +36,9 @@ public class Usuario {
 	@JsonIgnore
 	private Long id;
 	private String nombre;
+	// VALIDACION
+	@NotBlank(message="El nombre de usuario es obligatorio")
+	@Column(name="username")
 	private String nombreUsuario;
 	private String contrasena;
 	private Role role;

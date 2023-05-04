@@ -24,6 +24,8 @@ import com.mdef.gestionpreguntas.entidades.Usuario;
 import com.mdef.gestionpreguntas.repositorios.PreguntaRepositorio;
 import com.mdef.gestionpreguntas.repositorios.UsuarioRepositorio;
 
+import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("/usuarios")
@@ -104,7 +106,7 @@ public class UsuarioController {
 	}
 	
 	@PostMapping
-	public UsuarioModel add(@RequestBody UsuarioPostModel model) {
+	public UsuarioModel add(@Valid @RequestBody UsuarioPostModel model) {
 		Usuario usuario = repositorio.save(assembler.toEntity(model));
 		log.info("Añadido " + usuario);
 		return assembler.toModel(usuario);
