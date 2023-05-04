@@ -1,6 +1,13 @@
 package com.mdef.gestionpreguntas.entidades;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -17,6 +24,7 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name="USUARIOS")
@@ -24,8 +32,9 @@ import jakarta.persistence.Table;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="tipo_usuario", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue("null")
-public class Usuario {
+public class Usuario implements UserDetails {
 	
+	private static final long serialVersionUID = 1L;
 	public static enum Role {
 		Administrador,
 		NoAdministrador
@@ -46,6 +55,17 @@ public class Usuario {
 	// RELACION MANY TO ONE
 	@OneToMany(mappedBy = "usuario")
 	List<Pregunta> preguntas;
+	
+	// VARIABLES SECURITY JWT
+	@Column(name="cuenta_activa")
+	private boolean accountNonExpired = true;
+	@Column(name="cuenta_desbloqueada")
+	private boolean accountNonLocked = true;
+	@Column(name="credenciales_activas")
+	private boolean credentialsNonExpired = true;
+	@Column(name="habilitada")
+	private boolean enabled = true;
+	
 	
 	public Long getId() {
 		return id;
@@ -89,7 +109,51 @@ public class Usuario {
 				+ contrasena + ", role=" + role + ", preguntas=" + preguntas + "]";
 	}
 
+	// METODOS DE SEGURiDAD
+	public boolean isAccountNonExpired() {
+		return accountNonExpired;
+	}
+	public void setAccountNonExpired(boolean accountNonExpired) {
+		this.accountNonExpired = accountNonExpired;
+	}
+	public boolean isAccountNonLocked() {
+		return accountNonLocked;
+	}
+	public void setAccountNonLocked(boolean accountNonLocked) {
+		this.accountNonLocked = accountNonLocked;
+	}
+	public boolean isCredentialsNonExpired() {
+		return credentialsNonExpired;
+	}
+	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+		this.credentialsNonExpired = credentialsNonExpired;
+	}
+	public boolean isEnabled() {
+		return enabled;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
+	@Transient
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return new ArrayList<SimpleGrantedAuthority>(
+				Arrays.asList(new SimpleGrantedAuthority(getRole().toString()))
+				);
+				
+	}
+	@Override
+	public String getPassword() {
+		return contrasena;
+	}
+	@Override
+	public String getUsername() {
+		return nombreUsuario;
+	}
 	
 	
 }

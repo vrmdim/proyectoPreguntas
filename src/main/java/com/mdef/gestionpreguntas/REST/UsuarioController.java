@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -107,6 +108,7 @@ public class UsuarioController {
 	
 	@PostMapping
 	public UsuarioModel add(@Valid @RequestBody UsuarioPostModel model) {
+		model.setContrasena(new BCryptPasswordEncoder().encode(model.getContrasena()));
 		Usuario usuario = repositorio.save(assembler.toEntity(model));
 		log.info("Añadido " + usuario);
 		return assembler.toModel(usuario);
@@ -116,6 +118,10 @@ public class UsuarioController {
 	public UsuarioModel edit(@PathVariable Long id, @RequestBody UsuarioPutModel model){
 		Usuario usuario = repositorio.findById(id).map(usr -> {
 			usr.setNombre(model.getNombre());
+			//METODOS SEGURIDAD
+			usr.setRole(model.getRole());
+			usr.setNombreUsuario(model.getNombreUsuario());
+			////usr.setAccountNonExpired(model.is)
 			return repositorio.save(usr);
 		})
 		.orElseThrow(() -> new RegisterNotFoundException(id, "usuario"));

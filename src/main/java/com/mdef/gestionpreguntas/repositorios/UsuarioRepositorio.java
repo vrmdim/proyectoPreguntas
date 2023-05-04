@@ -1,6 +1,7 @@
 package com.mdef.gestionpreguntas.repositorios;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -14,5 +15,9 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
 	List<Usuario> findUsuarioByNombre(String nombre);
 	
 	List<Usuario> findUsuarioByNombreOrderByNombreUsuario(String nombre);
+	
+	// SEGURIDAD
+	Optional<Usuario> findByNombreUsuario(String nombreUsuario);
+
 	
 }
