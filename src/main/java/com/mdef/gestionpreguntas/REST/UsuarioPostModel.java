@@ -12,8 +12,8 @@ import com.mdef.gestionpreguntas.entidades.Usuario.Role;
 public class UsuarioPostModel extends RepresentationModel<UsuarioPostModel>{
 
 	private String nombre;
-	private String nombreUsuario;
-	private String contrasena;
+	private String username;
+	private String password;
 	private String telefono;
 	private Role role;
 	private Departamento departamento;
@@ -24,11 +24,11 @@ public class UsuarioPostModel extends RepresentationModel<UsuarioPostModel>{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
+	public void setUsername(String username) {
+		this.username = username;
 	}
-	public void setContrasena(String contrasena) {
-		this.contrasena = contrasena;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
@@ -36,11 +36,11 @@ public class UsuarioPostModel extends RepresentationModel<UsuarioPostModel>{
 	public String getNombre() {
 		return nombre;
 	}
-	public String getNombreUsuario() {
-		return nombreUsuario;
+	public String getUsername() {
+		return username;
 	}
-	public String getContrasena() {
-		return contrasena;
+	public String getPassword() {
+		return password;
 	}
 	public String getTelefono() {
 		return telefono;
@@ -67,7 +67,7 @@ public class UsuarioPostModel extends RepresentationModel<UsuarioPostModel>{
 	}
 	@Override
 	public String toString() {
-		return "UsuarioPostModel [nombre=" + nombre + ", nombreUsuario=" + nombreUsuario + ", contrasena=" + contrasena
+		return "UsuarioPostModel [nombre=" + nombre + ", nombreUsuario=" + username + ", contrasena=" + password
 				+ ", telefono=" + telefono + ", role=" + role + ", departamento=" + departamento + ", tipo=" + tipo
 				+ "]";
 	}

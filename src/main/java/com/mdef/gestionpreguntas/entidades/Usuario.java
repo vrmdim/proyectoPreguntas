@@ -47,10 +47,10 @@ public class Usuario implements UserDetails {
 	private Long id;
 	private String nombre;
 	// VALIDACION
-	//@NotBlank(message="El nombre de usuario es obligatorio")
-	@NotNull(message="El nombre de usuario es obligatorio")
+	@NotBlank(message="El nombre de usuario es obligatorio")
 	@Column(name="username")
 	private String username;
+	@NotBlank(message="La pass es obligatorio")
 	private String password;
 	private Role role;
 	

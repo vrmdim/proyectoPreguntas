@@ -38,7 +38,7 @@ public class UsuarioAssembler implements RepresentationModelAssembler<Usuario, U
 		
 		//Añado los parámetros que tenga UsuarioModel
 		usuarioModel.setNombre(entity.getNombre());
-		usuarioModel.setNombreUsuario(entity.getUsername());
+		usuarioModel.setUsername(entity.getUsername());
 		usuarioModel.setRole(entity.getRole());
 		
 		
@@ -71,7 +71,8 @@ public class UsuarioAssembler implements RepresentationModelAssembler<Usuario, U
 		}
 		
 		usuario.setNombre(model.getNombre());
-		usuario.setUsername(model.getNombreUsuario());
+		usuario.setUsername(model.getUsername());
+		usuario.setPassword(model.getPassword());
 		
 		return usuario;
 	}
@@ -95,7 +96,7 @@ public class UsuarioAssembler implements RepresentationModelAssembler<Usuario, U
 		}
 		
 		usuario.setNombre(model.getNombre());
-		usuario.setUsername(model.getNombreUsuario());
+		usuario.setUsername(model.getUsername());
 		
 		// Security
 		usuario.setAccountNonExpired(model.isAccountNonExpired());

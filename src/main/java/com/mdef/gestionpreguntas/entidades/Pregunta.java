@@ -48,6 +48,14 @@ public class Pregunta {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+	
+	
+	public Familia getFamilia() {
+		return familia;
+	}
+	public void setFamilia(Familia familia) {
+		this.familia = familia;
+	}
 	@Override
 	public String toString() {
 		return "Pregunta [id=" + id + ", enunciado=" + enunciado + ", usuario=" + usuario + "]";

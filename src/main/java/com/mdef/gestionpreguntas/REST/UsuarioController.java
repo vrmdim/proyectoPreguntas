@@ -110,7 +110,7 @@ public class UsuarioController {
 	@PostMapping
 	public UsuarioModel add(@Valid @RequestBody UsuarioPostModel model) {
 		// Seguridad contraseña
-		model.setContrasena(new BCryptPasswordEncoder().encode(model.getContrasena()));
+		model.setPassword(new BCryptPasswordEncoder().encode(model.getPassword()));
 		Usuario usuario = repositorio.save(assembler.toEntity(model));
 		log.info("Añadido " + usuario);
 		return assembler.toModel(usuario);
@@ -122,7 +122,7 @@ public class UsuarioController {
 			usr.setNombre(model.getNombre());
 			//METODOS SEGURIDAD
 			usr.setRole(model.getRole());
-			usr.setUsername(model.getNombreUsuario());
+			usr.setUsername(model.getUsername());
 			usr.setAccountNonExpired(model.isAccountNonExpired());
 			usr.setAccountNonLocked(model.isAccountNonLocked());
 			usr.setCredentialsNonExpired(model.isCredentialsNonExpired());

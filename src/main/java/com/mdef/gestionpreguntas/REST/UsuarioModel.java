@@ -8,20 +8,20 @@ import com.mdef.gestionpreguntas.entidades.Usuario.Role;
 public class UsuarioModel extends RepresentationModel<UsuarioModel>{
 
 	private String nombre;
-	private String nombreUsuario;
+	private String username;
 	private Role role;	
 	
 	public String getNombre() {
 		return nombre;
 	}
-	public String getNombreUsuario() {
-		return nombreUsuario;
+	public String getUsername() {
+		return username;
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public Role getRole() {
 		return role;
@@ -31,7 +31,7 @@ public class UsuarioModel extends RepresentationModel<UsuarioModel>{
 	}
 	@Override
 	public String toString() {
-		return "UsuarioModel [nombre=" + nombre + ", nombreUsuario=" + nombreUsuario + ", role=" + role + "]";
+		return "UsuarioModel [nombre=" + nombre + ", nombreUsuario=" + username + ", role=" + role + "]";
 	}
 
 

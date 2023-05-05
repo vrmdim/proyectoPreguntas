@@ -12,7 +12,7 @@ import com.mdef.gestionpreguntas.entidades.Usuario.Role;
 public class UsuarioPutModel extends RepresentationModel<UsuarioPutModel>{
 	
 	private String nombre;
-	private String nombreUsuario;
+	private String username;
 	private Departamento departamento;
 	private Tipo tipo;
 	private String telefono;
@@ -28,8 +28,8 @@ public class UsuarioPutModel extends RepresentationModel<UsuarioPutModel>{
 	public String getNombre() {
 		return nombre;
 	}
-	public String getNombreUsuario() {
-		return nombreUsuario;
+	public String getUsername() {
+		return username;
 	}
 	public String getTelefono() {
 		return telefono;
@@ -37,8 +37,8 @@ public class UsuarioPutModel extends RepresentationModel<UsuarioPutModel>{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
@@ -63,7 +63,7 @@ public class UsuarioPutModel extends RepresentationModel<UsuarioPutModel>{
 	}
 	@Override
 	public String toString() {
-		return "UsuarioPutModel [nombre=" + nombre + ", nombreUsuario=" + nombreUsuario + ", departamento="
+		return "UsuarioPutModel [nombre=" + nombre + ", nombreUsuario=" + username + ", departamento="
 				+ departamento + ", tipo=" + tipo + ", telefono=" + telefono + ", role=" + role + "]";
 	}
 	
