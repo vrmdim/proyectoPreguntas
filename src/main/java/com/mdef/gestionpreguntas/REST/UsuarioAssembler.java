@@ -40,6 +40,8 @@ public class UsuarioAssembler implements RepresentationModelAssembler<Usuario, U
 		usuarioModel.setNombre(entity.getNombre());
 		usuarioModel.setUsername(entity.getUsername());
 		usuarioModel.setRole(entity.getRole());
+		// Pongo pass a null para que no se vea en el model
+		usuarioModel.setPassword(null);
 		
 		
 		

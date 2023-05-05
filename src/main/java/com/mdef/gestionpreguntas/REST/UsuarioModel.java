@@ -10,7 +10,13 @@ public class UsuarioModel extends RepresentationModel<UsuarioModel>{
 	private String nombre;
 	private String username;
 	private Role role;	
+	private String password;
 	
+	
+	
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public String getNombre() {
 		return nombre;
 	}
