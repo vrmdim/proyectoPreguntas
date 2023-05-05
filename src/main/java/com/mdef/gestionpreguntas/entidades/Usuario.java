@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.DiscriminatorType;
@@ -46,7 +47,8 @@ public class Usuario implements UserDetails {
 	private Long id;
 	private String nombre;
 	// VALIDACION
-	@NotBlank(message="El nombre de usuario es obligatorio")
+	//@NotBlank(message="El nombre de usuario es obligatorio")
+	@NotNull(message="El nombre de usuario es obligatorio")
 	@Column(name="username")
 	private String username;
 	private String password;
