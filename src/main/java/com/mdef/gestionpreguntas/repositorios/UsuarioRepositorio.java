@@ -14,10 +14,10 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
 	//@Query("SELECT u FROM USUARIO u WHERE u.nombre = :nombre")
 	List<Usuario> findUsuarioByNombre(String nombre);
 	
-	List<Usuario> findUsuarioByNombreOrderByNombreUsuario(String nombre);
+	List<Usuario> findUsuarioByNombreOrderByUsername(String nombre);
 	
 	// SEGURIDAD
-	Optional<Usuario> findByNombreUsuario(String nombreUsuario);
+	Optional<Usuario> findByUsername(String nombreUsuario);
 
 	
 }

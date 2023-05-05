@@ -122,7 +122,7 @@ public class UsuarioController {
 			usr.setNombre(model.getNombre());
 			//METODOS SEGURIDAD
 			usr.setRole(model.getRole());
-			usr.setNombreUsuario(model.getNombreUsuario());
+			usr.setUsername(model.getNombreUsuario());
 			usr.setAccountNonExpired(model.isAccountNonExpired());
 			usr.setAccountNonLocked(model.isAccountNonLocked());
 			usr.setCredentialsNonExpired(model.isCredentialsNonExpired());
@@ -137,7 +137,7 @@ public class UsuarioController {
 	@PatchMapping("{id}/cambiarContrasena")
 	public UsuarioModel edit(@PathVariable Long id, @RequestBody String newPass) {
 		Usuario usuario = repositorio.findById(id).map(usr -> {
-			usr.setContrasena(new BCryptPasswordEncoder().encode(newPass));
+			usr.setPassword(new BCryptPasswordEncoder().encode(newPass));
 			return repositorio.save(usr);
 		})
 		.orElseThrow(() -> new RegisterNotFoundException(id, "usuario"));

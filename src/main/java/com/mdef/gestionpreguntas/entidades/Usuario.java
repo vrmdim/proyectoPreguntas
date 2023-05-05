@@ -48,8 +48,8 @@ public class Usuario implements UserDetails {
 	// VALIDACION
 	@NotBlank(message="El nombre de usuario es obligatorio")
 	@Column(name="username")
-	private String nombreUsuario;
-	private String contrasena;
+	private String username;
+	private String password;
 	private Role role;
 	
 	// RELACION MANY TO ONE
@@ -73,11 +73,11 @@ public class Usuario implements UserDetails {
 	public String getNombre() {
 		return nombre;
 	}
-	public String getNombreUsuario() {
-		return nombreUsuario;
+	public String getUsername() {
+		return username;
 	}
-	public String getContrasena() {
-		return contrasena;
+	public String getPassword() {
+		return password;
 	}
 	public void setId(Long id) {
 		this.id = id;
@@ -85,11 +85,11 @@ public class Usuario implements UserDetails {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
+	public void setUsername(String nombreUsuario) {
+		this.username = nombreUsuario;
 	}
-	public void setContrasena(String contrasena) {
-		this.contrasena = contrasena;
+	public void setPassword(String contrasena) {
+		this.password = contrasena;
 	}
 	public Role getRole() {
 		return role;
@@ -105,8 +105,8 @@ public class Usuario implements UserDetails {
 	}
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nombre=" + nombre + ", nombreUsuario=" + nombreUsuario + ", contrasena="
-				+ contrasena + ", role=" + role + ", preguntas=" + preguntas + "]";
+		return "Usuario [id=" + id + ", nombre=" + nombre + ", nombreUsuario=" + username + ", contrasena="
+				+ password + ", role=" + role + ", preguntas=" + preguntas + "]";
 	}
 
 	// METODOS DE SEGURiDAD
@@ -145,14 +145,6 @@ public class Usuario implements UserDetails {
 				Arrays.asList(new SimpleGrantedAuthority(getRole().toString()))
 				);
 				
-	}
-	@Override
-	public String getPassword() {
-		return contrasena;
-	}
-	@Override
-	public String getUsername() {
-		return nombreUsuario;
 	}
 	
 	
