@@ -1,13 +1,11 @@
 package com.mdef.gestionpreguntas.entidades;
 
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
 
-//el discriminator value va a crear una columna con ese valor en la BBDD
-@Entity
-@DiscriminatorValue("Admin")
+
 public class Administrador extends Usuario {
 	
+	private static final long serialVersionUID = 1L;
+
 	public Administrador() {
 		super();
 		super.setRole(Usuario.Role.Administrador);

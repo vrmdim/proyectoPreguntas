@@ -9,6 +9,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+
+// ENTIENDO QUE ESTA CLASE ES NECESARIA, PORQUE support.Familia NO TIENE ID, Y HAY QUE METERSELO, ENTONCES YA USO DECORADORES EN ESTA CLASE
 @Entity
 @Table(name="FAMILIAS")
 public class Familia extends es.mdef.support.Familia {

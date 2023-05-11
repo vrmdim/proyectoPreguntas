@@ -1,13 +1,10 @@
 package com.mdef.gestionpreguntas.entidades;
 
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
 
-// el discriminator value va a crear una columna con ese valor en la BBDD
-@Entity
-@DiscriminatorValue("NoAdmin")
+
 public class NoAdministrador extends Usuario {
 	
+	private static final long serialVersionUID = 1L;
 	public static enum Tipo {
 		alumno,
 		docente,
